@@ -1,0 +1,14 @@
+{
+  "name": "marithradio-kerst",
+  "version": "1.0.0",
+  "description": "Statische MarithRadio Kerst speler",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "MarithRadio",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
