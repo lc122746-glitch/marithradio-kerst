@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarithRadio Kerst</title>
+<style>
+body { 
+  background: linear-gradient(to bottom, #ffe6f0, #ffffff); 
+  font-family: sans-serif; 
+  text-align: center; 
+  overflow: hidden; 
+  height: 100vh; 
+  margin: 0;
+}
+h1 { color: #ff1a75; margin-top: 40px; }
+button { font-size: 30px; padding: 10px 20px; margin: 20px; cursor: pointer; }
+.snowflake { position: absolute; color: white; font-size: 20px; user-select: none; pointer-events: none; }
+</style>
+</head>
+<body>
+<h1>MarithRadio Kerst</h1>
+<button id="play">▶ Play / ❚❚ Pause</button>
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+<script>
+const btn = document.getElementById('play');
+const audio = document.getElementById('music');
+btn.onclick = () => {
+  if(audio.paused){ audio.play(); btn.textContent="❚❚ Pause"; }
+  else{ audio.pause(); btn.textContent="▶ Play"; }
+};
+
+// Sneeuw
+function sneeuw(){
+  const s = document.createElement('div');
+  s.className='snowflake';
+  s.textContent='*';
+  s.style.left = Math.random()*window.innerWidth+'px';
+  s.style.fontSize = (Math.random()*20+10)+'px';
+  s.style.top = '-20px';
+  document.body.appendChild(s);
+  let y=0;
+  const speed=Math.random()*2+1;
+  function vallen(){
+    y+=speed; 
+    s.style.top=y+'px'; 
+    if(y<window.innerHeight){requestAnimationFrame(vallen);} 
+    else{s.remove();}
+  }
+  vallen();
+}
+setInterval(sneeuw,200);
+</script>
+</body>
+</html>
