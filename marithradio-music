@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarithRadio Kerst Snow</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to bottom, #ffe6f0, #ffffff);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px #ffcccc;
+  }
+  h1 { color: #ff1a75; margin-bottom: 20px; }
+  #playButton { width: 120px; cursor: pointer; border-radius: 20px; box-shadow: 0px 4px 8px rgba(0,0,0,0.4); transition: transform 0.2s; z-index:10; position:relative; }
+  #playButton:hover { transform: scale(1.1); }
+  #santa { position: absolute; bottom: 10px; right: 10px; width: 100px; z-index: 10; }
+  .snowflake { position: absolute; color: white; font-size: 1em; user-select: none; pointer-events: none; }
+</style>
+</head>
+<body>
+<h1>MarithRadio Kerst</h1>
+<img id="playButton" src="play.png" alt="Play">
+<audio id="radioStream" autoplay loop>
+  <source src="music/kerst1.mp3" type="audio/mpeg">
+</audio>
+<img id="santa" src="santa.png" alt="Kerstman">
+<script>
+const playButton = document.getElementById('playButton');
+const radioStream = document.getElementById('radioStream');
+let isPlaying = true;
+
+playButton.addEventListener('click', ()=>{
+  if(!isPlaying){
+    radioStream.play(); 
+    playButton.src='pause.png';
+  } else {
+    radioStream.pause(); 
+    playButton.src='play.png';
+  }
+  isPlaying = !isPlaying;
+});
+
+// Sneeuw animatie
+function createSnowflake(){
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+  snowflake.style.left = Math.random() * window.innerWidth + 'px';
+  snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+  snowflake.textContent = '*'; // vervang emoji door ster of gewoon *
+  document.body.appendChild(snowflake);
+  let y = 0;
+  const speed = Math.random() * 2 + 1;
+  function fall() {
+    y += speed; 
+    snowflake.style.top = y + 'px'; 
+    if(y < window.innerHeight){
+      requestAnimationFrame(fall);
+    } else {
+      snowflake.remove();
+    }
+  }
+  fall();
+}
+setInterval(createSnowflake, 200);
+</script>
+</body>
+</html>
