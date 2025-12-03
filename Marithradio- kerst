@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Pas aan als je een andere branch gebruikt
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      # 1️⃣ Checkout de repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configure GitHub Pages
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v3
+
+      # 3️⃣ Maak een ZIP van de site (alles behalve .git en workflows)
+      - name: Create site archive
+        run: |
+          zip -r site.zip . -x ".git/*" ".github/workflows/*"
+
+      # 4️⃣ Upload de ZIP naar Pages
+      - name: Upload Pages asset
+        id: upload
+        uses: actions/upload-pages-asset@v1
+        with:
+          path: ./site.zip
+
+      # 5️⃣ Deploy naar GitHub Pages
+      - name: Deploy to Pages
+        id: deploy
+        uses: actions/deploy-pages@v1
+        with:
+          asset_id: ${{ steps.upload.outputs.asset_id }}
