@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MarithRadio Kerst</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🎄 MarithRadio Kerst 🎵✨</h1>
+  </header>
+
+  <main>
+    <section class="player" aria-label="Radioplayer">
+      <div class="cover">
+        <img id="santa" src="assets/images/santa.svg" alt="Kerstman" />
+      </div>
+
+      <div class="controls">
+        <button id="playButton" aria-pressed="false" aria-label="Play" title="Play / Pause">
+          <img id="playIcon" src="assets/images/play.svg" alt="Play" />
+        </button>
+
+        <div class="volume">
+          <label for="volumeRange" class="visually-hidden">Volume</label>
+          <input id="volumeRange" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+        </div>
+
+        <div class="track-info" aria-live="polite">
+          <div id="trackTitle">Kerstmix 1</div>
+          <div id="trackStatus" class="muted">Autoplay kan geblokkeerd zijn — klik play</div>
+        </div>
+
+        <div class="playlist" id="playlist" aria-label="Playlist">
+          <!-- JS vult de playlist -->
+        </div>
+
+        <audio id="radioStream" preload="none">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+          Je browser ondersteunt geen audio-element.
+        </audio>
+      </div>
+    </section>
+
+    <div id="snowContainer" aria-hidden="true"></div>
+  </main>
+
+  <footer>
+    <small>© MarithRadio Kerst</small>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
