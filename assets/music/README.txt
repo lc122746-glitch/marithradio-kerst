@@ -1,0 +1,1 @@
+This folder is for your MP3 files. The example player uses public example MP3 URLs so it works immediately. To use your own files, upload MP3s here and update the playlist in script.js (or replace the URLs in the playlist array).
